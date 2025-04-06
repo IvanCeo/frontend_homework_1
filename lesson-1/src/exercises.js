@@ -19,6 +19,11 @@
 
 // Напишите функцию на JavaScript для клонирования массива.
 
+function array_Clone(arr) {
+    const new_arr = [...arr];
+    return new_arr
+}
+
 // Тестовые данные:
 // console.log(array_Clone([1, 2, 4, 0]));
 // console.log(array_Clone([1, 2, [4, 0]]));
@@ -32,6 +37,12 @@
 // Напишите функцию на JavaScript для получения первого элемента массива.
 // Передавая параметр 'n', можно получить первые 'n' элементов массива.
 
+function first(arr, n) {
+    if (n !== undefined) {  
+        return arr.slice(0, n);  
+    }
+    return arr[0];  
+}
 // Тестовые данные:
 // console.log(first([7, 9, 0, -2]));
 // console.log(first([],3));
@@ -51,6 +62,13 @@
 // Напишите функцию на JavaScript для получения последнего элемента массива.
 // Передавая параметр 'n', можно получить последние 'n' элементов массива.
 
+function last(arr, n) {
+    if (n !== undefined) {
+        return arr.slice(-n);
+    }
+    return arr[arr.length - 1];  // Правильный способ получить последний элемент
+}
+
 // Тестовые данные:
 // console.log(last([7, 9, 0, -2]));
 // console.log(last([7, 9, 0, -2],3));
@@ -66,8 +84,18 @@
 // Напишите простую программу на JavaScript для объединения
 // всех элементов следующего массива в строку.
 
-// Пример массива: `myColor = ["Red", "Green", "White", "Black"];`
+function concat(arr, synmbol){
+    if (synmbol !== undefined){
+        return arr.join(synmbol)
+    }
+    return arr.join(', ')
+}
 
+// Пример массива: `myColor = ["Red", "Green", "White", "Black"];`
+const myColor = ["Red", "Green", "White", "Black"];
+// console.log(concat(myColor));
+// console.log(concat(myColor));
+// console.log(concat(myColor, '+'));
 // Ожидаемый вывод:
 // "Red,Green,White,Black"
 // "Red,Green,White,Black"
@@ -79,12 +107,58 @@
 // в качестве ввода и вставляет дефисы (-) между каждым чётным числом.
 // Например, если ввести 025468, вывод должен быть 0-254-6-8.
 
+function insertHyphensBetweenEvens(num) {
+    // Преобразуем число в строку для работы с отдельными цифрами
+    const str = num.toString();
+    let result = [];
+    
+    for (let i = 0; i < str.length; i++) {
+      // Добавляем текущую цифру в результат
+      result.push(str[i]);
+      
+      // Проверяем, нужно ли вставить дефис
+      if (i < str.length - 1) {
+        const current = parseInt(str[i], 10);
+        const next = parseInt(str[i + 1], 10);
+        
+        // Если обе цифры четные, добавляем дефис
+        if (current % 2 === 0 && next % 2 === 0) {
+          result.push('-');
+        }
+      }
+    }
+    
+    // Собираем результат в строку
+    return result.join('');
+  }
+  
+  // Пример использования
+  console.log(insertHyphensBetweenEvens('025468')); // Выведет "0-254-6-8"
+  console.log(insertHyphensBetweenEvens(246824)); // Выведет "2-4-6-8-2-4"
+  console.log(insertHyphensBetweenEvens(13579));  // Выведет "13579" (без изменений)
+  console.log(insertHyphensBetweenEvens(224466)); // Выведет "2-2-4-4-6-6"
+
 // 6. Сортировка массива
 
 // Напишите программу на JavaScript для сортировки элементов массива.
 
+function sortDescWithMathMax(arr) {
+    const result = [];
+    const temp = [...arr];
+    
+    while (temp.length) {
+      const min = Math.min(...temp);
+      const index = temp.indexOf(min);
+      temp.splice(index, 1);
+      result.push(min);
+    }
+    
+    return result;
+  }
+
 // Пример массива:
-// const arr1 = [ -3, 8, 7, 6, 5, -4, 3, 2, 1 ];
+const arr1 = [ -3, 8, 7, 6, 5, -4, 3, 2, 1 ];
+console.log(sortDescWithMathMax(arr1))
 
 // Ожидаемый вывод:
 // -4,-3,1,2,3,5,6,7,8
@@ -92,6 +166,21 @@
 // 7. Самый частый элемент массива
 
 // Напишите программу на JavaScript для нахождения самого частого элемента в массиве.
+function mostFreq(arr){
+    const count = {};
+    let maxCount = 0;
+    let mostFrequent;
+
+    arr.forEach(item => {
+        count[item] = (count[item] || 0) + 1;
+        if (count[item] > maxCount) {
+        maxCount = count[item];
+        mostFrequent = item;
+        }
+    });
+
+    return mostFrequent;
+}
 
 // Пример массива:
 // const arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
@@ -105,6 +194,12 @@
 // меняет регистр каждого символа.
 // Например, если ввести 'The Quick Brown Fox',
 // вывод должен быть 'tHE qUICK bROWN fOX'.
+
+function swapCase(str) {
+    return str.split('').map(c => 
+      c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()
+    ).join('');
+  }
 
 // 9. Сумма квадратов элементов массива
 
