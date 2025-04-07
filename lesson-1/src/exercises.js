@@ -158,7 +158,7 @@ function sortDescWithMathMax(arr) {
 
 // Пример массива:
 const arr1 = [ -3, 8, 7, 6, 5, -4, 3, 2, 1 ];
-console.log(sortDescWithMathMax(arr1))
+// console.log(sortDescWithMathMax(arr1))
 
 // Ожидаемый вывод:
 // -4,-3,1,2,3,5,6,7,8
@@ -206,15 +206,41 @@ function swapCase(str) {
 // Напишите программу на JavaScript для нахождения
 // суммы квадратов чисел в массиве.
 
+function squareSum(arr){
+  return arr.reduce((accumulator, currentValue) => accumulator + currentValue*currentValue, 0)
+}
+
+console.log(squareSum([2, 7, 14]))
+
 // 10. Сумма и произведение элементов массива
 
 // Напишите программу на JavaScript для вычисления суммы и
 // произведения элементов массива целых чисел.
 
+function sumAndComposition(arr){
+  let summa = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  let composition = arr.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
+  return ['sum: ',summa, 'composition: ', composition]
+}
+
+// console.log(sumAndComposition([4,2,3]))
+
 // 11. Удаление дубликатов
 
 // Напишите программу на JavaScript для удаления дублирующихся
 // элементов из массива (игнорируя чувствительность к регистру).
+
+function removeDuplicates(arr){
+  let map = []
+  for (let element of arr){
+    if (map.indexOf(element.toLowerCase()) === -1){
+      map.push(element.toLowerCase())
+    }
+  }
+  return map
+}
+
+// console.log(removeDuplicates(['cat', 'Cat', 'dog']))
 
 // 12. Вывод цветов с порядковыми номерами
 
@@ -226,3 +252,13 @@ function swapCase(str) {
 // "2nd choice is Green."
 // "3rd choice is Red."
 // Примечание: Используйте порядковые числительные для указания их позиции.
+
+function colorFunc(color, p){
+  for (let i = 0; i < 3; i++){
+    console.log(`"${i + 1}${p[i + 1]} choice is ${color[i]}"`)
+  }
+}
+
+let color = ["Blue", "Green", "Red", "Orange", "Violet", "Indigo", "Yellow"];
+let o = ["th", "st", "nd", "rd"]
+colorFunc(color, o)
